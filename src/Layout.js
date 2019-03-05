@@ -7,8 +7,6 @@ import Helmet from 'react-helmet';
 // Using bootstrap is completely optional. It's used here to provide a clean layout for samples,
 // without needing extra CSS in the sample app. Remove it in package.json as well if it's removed here.
 import 'bootstrap/dist/css/bootstrap.css';
-import './assets/app.css';
-import logo from './assets/sc_logo.png';
 
 /*
   APP LAYOUT
@@ -22,27 +20,7 @@ import logo from './assets/sc_logo.png';
 // Most apps may also wish to use GraphQL for their navigation construction; this sample does not simply to support disconnected mode.
 let Navigation = ({ t, i18n }) => (
   <div className="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom">
-    <h5 className="my-0 mr-md-auto font-weight-normal">
-      <NavLink to="/" className="text-dark">
-        <img src={logo} alt="Sitecore" />
-      </NavLink>
-    </h5>
-    <nav className="my-2 my-md-0 mr-md-3">
-      <a
-        className="p-2 text-dark"
-        href="https://jss.sitecore.net"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        {t('Documentation')}
-      </a>
-      <NavLink to="/styleguide" className="p-2 text-dark">
-        {t('Styleguide')}
-      </NavLink>
-      <NavLink to="/graphql" className="p-2 text-dark">
-        {t('GraphQL')}
-      </NavLink>
-    </nav>
+
   </div>
 );
 
