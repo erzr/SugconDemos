@@ -1,3 +1,13 @@
 id: home-page
 fields:
   pageTitle: Welcome to Sitecore JSS
+placeholders:
+  jss-main:
+    - componentName: DemoStructure
+      placeholders:
+        jss-demo-main:
+          - componentName: TextSection
+            fields:
+              heading: Welcome to the SUGCON GraphQL Demos
+              body: |
+                <p>Thanks for attending my SUGCON talk! This application contains a collection of use cases for GraphQL. Use the navigation on the side to explore the different demos available.</p>
