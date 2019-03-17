@@ -1,17 +1,8 @@
 import React from 'react';
-import gql from 'graphql-tag';
+import { loader as gqlLoader } from 'graphql.macro';
 import { Subscription } from "react-apollo";
-import { Table } from 'react-bootstrap';
 
-const ConnectedDemoQuery = gql`
-subscription
-{
-  itemAdded {
-    id
-    name
-  }
-}
-`;
+const ConnectedDemoQuery = gqlLoader('./query.graphql');
 
 class ActivityLog extends React.Component {
 
@@ -40,7 +31,7 @@ class ActivityLog extends React.Component {
       {this.state.items.map((item, index) => {
         return <div>{item.name}</div>
       })}
-    </div>;
+    </div>
   }
 
 }

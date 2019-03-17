@@ -1,0 +1,16 @@
+id: chatroom
+fields:
+  pageTitle: Sitecore Chat
+placeholders:
+  jss-main:
+    - componentName: DemoStructure
+      placeholders:
+        jss-demo-main:
+          - componentName: TextSection
+            fields:
+              heading: Welcome to the SUGCON GraphQL Demos
+              body: |
+                <p>This is a demo of a GraphQL subscription query.</p>
+          - componentName: ChatRoom
+            fields:
+              heading: Chatroom Demo

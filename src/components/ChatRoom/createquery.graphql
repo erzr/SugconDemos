@@ -1,0 +1,15 @@
+mutation Test($name:String!, $parent:String!, $message:String!)
+{
+  createItem(
+    name:$name, 
+    template:"{D8082DEC-6A5D-53BF-B1B2-0EFA04320641}", 
+    parent:$parent,
+  	fields:[
+      {
+        name:"Message",
+        value:$message
+      }
+    ]) {
+    name
+  }
+}

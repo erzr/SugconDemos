@@ -1,7 +1,9 @@
 subscription
 {
   itemAdded {
+    
     id
     name
+
   }
 }
