@@ -6,8 +6,8 @@ export default function(manifest) {
     name: 'TextSection',
     icon: SitecoreIcon.DocumentTag,
     fields: [
-      { name: 'heading', type: CommonFieldTypes.SingleLineText },
-      { name: 'body', type: CommonFieldTypes.RichText },
+      { name: 'heading', displayName: 'Heading', type: CommonFieldTypes.SingleLineText },
+      { name: 'body', displayName: 'Body', type: CommonFieldTypes.RichText },
     ]
   });
 }

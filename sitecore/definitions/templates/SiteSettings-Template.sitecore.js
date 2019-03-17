@@ -10,9 +10,10 @@ export default function(manifest) {
   manifest.addTemplate({
     name: 'SiteSettings-Template',
     fields: [
-        { name: 'siteTitle', type: CommonFieldTypes.SingleLineText },
+        { name: 'siteTitle', displayName: 'Site Title', type: CommonFieldTypes.SingleLineText },
         {
             name: 'demoLinks',
+            displayName: 'Demo Links',
             type: CommonFieldTypes.ContentList,
             source: `dataSource=/sitecore/content/${
               packageJson.config.appName
