@@ -1,0 +1,15 @@
+subscription Test
+{
+  itemSaved {
+    item {
+      name
+    }
+    changes {
+      fieldChanges {
+        fieldName
+        oldValue
+        newValue
+      }
+    }
+  }
+}

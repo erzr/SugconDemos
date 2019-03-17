@@ -3,6 +3,8 @@
 import 'isomorphic-fetch';
 import { ApolloClient } from 'apollo-client';
 import { InMemoryCache, IntrospectionFragmentMatcher } from 'apollo-cache-inmemory';
+import { split } from 'apollo-link';
+import { getMainDefinition } from 'apollo-utilities';
 
 /*
   INTROSPECTION DATA
@@ -28,6 +30,7 @@ import introspectionQueryResultData from '../temp/GraphQLFragmentTypes.json';
 
 // ...or a batched link (multiple queries within 10ms all go in one HTTP request)
 import { BatchHttpLink } from 'apollo-link-batch-http';
+import { WebSocketLink } from 'apollo-link-ws';
 
 // ...and an automatic persisted query link, which reduces bandwidth by using query hashes to alias content
 // the APQ link is _chained_ behind another link that performs the actual HTTP calls, so you can choose
@@ -36,9 +39,33 @@ import { createPersistedQueryLink } from 'apollo-link-persisted-queries';
 
 export default function(endpoint, ssr, initialCacheState) {
   /* HTTP link selection: default to batched + APQ */
-  const link = createPersistedQueryLink().concat(
+  const httpLink = createPersistedQueryLink().concat(
     new BatchHttpLink({ uri: endpoint, credentials: 'include' })
   );
+
+  let link = null;
+
+  if (!ssr) {
+    const wsLink = new WebSocketLink({
+      uri: endpoint.replace('http://', 'ws://'),
+      options: {
+        reconnect: true
+      }
+    });
+
+      // https://www.apollographql.com/docs/react/advanced/subscriptions.html
+      link = split(
+    // split based on operation type
+    ({ query }) => {
+      const { kind, operation } = getMainDefinition(query);
+      return kind === 'OperationDefinition' && operation === 'subscription';
+    },
+    wsLink,
+    httpLink,
+  );
+  } else {
+    link = httpLink;
+  }
 
   const cache = new InMemoryCache({
     fragmentMatcher: new IntrospectionFragmentMatcher({
