@@ -10,4 +10,4 @@ placeholders:
             fields:
               heading: Welcome to the SUGCON GraphQL Demos
               body: |
-                <p>Thanks for attending my SUGCON talk! This application contains a collection of use cases for GraphQL. Use the navigation on the side to explore the different demos available.</p>
+                <p>Thanks for attending my SUGCON talk! This application contains a collection of use cases for GraphQL. Use the navigation in the top navigation to explore the different demos available.</p>

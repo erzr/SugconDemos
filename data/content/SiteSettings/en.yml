@@ -1,0 +1,4 @@
+id: site-settings
+template: SiteSettings-Template
+fields:
+  siteTitle: SUGCON EU

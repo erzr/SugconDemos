@@ -1,0 +1,20 @@
+query NavbarSiteSettings($id:String)
+{
+  item(path:$id) {
+    ... on SiteSettingsTemplate {
+      siteTitle {
+        value
+      }
+      demoLinks {
+        targetItems {
+          ... on AppRoute {
+            pageTitle {
+              value
+            }
+          }
+          url
+        }
+      }
+    }
+  }
+}
