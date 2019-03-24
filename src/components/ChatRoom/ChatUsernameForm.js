@@ -33,7 +33,7 @@ class ChatUsernameForm extends React.Component {
     render() {
         return (
             <Form onSubmit={(e) => { this.handleUsernameSubmit(e) }}>
-                <InputGroup className="mb-3">
+                <InputGroup className="mb-3" size="lg">
                     <FormControl type="text" placeholder="Enter username"
                         value={this.state.username} onChange={this.handleUsernameChange} />
                     <InputGroup.Append>

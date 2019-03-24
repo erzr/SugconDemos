@@ -8,7 +8,7 @@ const ItemQuery = ({itemQuery}) => {
   const { item } = itemQuery;
 
   return (
-    <div>{item && item.name}</div>
+    <div>Item name: <strong>{item && item.name}</strong></div>
   );
 };
 

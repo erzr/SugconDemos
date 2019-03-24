@@ -59,7 +59,7 @@ class ChatRoomForm extends React.Component {
             <Mutation mutation={CreateMessageQuery} ignoreResults={true} onCompleted={this.handleAddMessageCompleted}>
                 {(addMessage, { data }) => (
                     <Form onSubmit={(e) => { this.handleMessageSubmit(e, addMessage) }}>
-                        <InputGroup className="mb-3">
+                        <InputGroup className="mb-3" size="lg">
                             <FormControl
                                 type="text" placeholder="Enter message"
                                 value={this.state.message} onChange={this.handleMessageChange}
