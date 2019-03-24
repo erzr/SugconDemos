@@ -1,4 +1,4 @@
-mutation Test($name:String!, $parent:String!, $message:String!)
+mutation Test($name:String!, $parent:String!, $message:String!, $username:String!)
 {
   createItem(
     name:$name, 
@@ -8,6 +8,10 @@ mutation Test($name:String!, $parent:String!, $message:String!)
       {
         name:"Message",
         value:$message
+      },
+      {
+        name:"Username",
+        value:$username
       }
     ]) {
     name

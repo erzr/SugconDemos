@@ -6,6 +6,9 @@ query MessageQuery($path:String!){
       message {
         value
       }
+      username {
+        value
+      }
     }
   }
 }

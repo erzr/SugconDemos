@@ -1,6 +1,6 @@
-query NavbarSiteSettings($id:String)
+query HeaderSettings($id:String)
 {
-  item(path:$id) {
+  header: item(path:$id) {
     ... on SiteSettingsTemplate {
       siteTitle {
         value

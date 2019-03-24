@@ -14,17 +14,17 @@ let DemoNavDropdown = ({ demoLinks }) => (
 );
 
 let Header = ({t, headerQuery}) => {
-    const { item } = headerQuery;
+    const { header } = headerQuery;
 
     return (
         <Navbar bg="dark" expand="lg" variant="dark">
             <Container>
-                <Navbar.Brand href="/">{item && item.siteTitle.value}</Navbar.Brand>
+                <Navbar.Brand href="/">{header && header.siteTitle.value}</Navbar.Brand>
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="mr-auto">
                         {<Nav.Link href="/">{t('Home')}</Nav.Link>}
-                        {item && item.demoLinks && <DemoNavDropdown demoLinks={item.demoLinks.targetItems} />}
+                        {header && header.demoLinks && <DemoNavDropdown demoLinks={header.demoLinks.targetItems} />}
                     </Nav>
                 </Navbar.Collapse>
             </Container>

@@ -1,119 +1,60 @@
 import React from 'react';
-import { loader as gqlLoader } from 'graphql.macro';
-import { Form, Button } from 'react-bootstrap';
-import { Subscription, Mutation, Query } from "react-apollo";
+import ChatRoomMessages from './ChatRoomMessages';
+import ChatRoomForm from './ChatRoomForm';
+import ChatRoomSubscription from './ChatRoomSubscription';
+import ChatUsernameForm from './ChatUsernameForm';
 
-const ConnectedDemoQuery = gqlLoader('./query.graphql');
-const CreateMessageQuery = gqlLoader('./createquery.graphql');
-const MessageQuery = gqlLoader('./messagequery.graphql');
-
-const ChatRoomMessage = ({ message }) => {
-  return (
-    <Query query={MessageQuery} variables={ {path: message.id} }>
-    {({ loading, error, data }) => {
-      if (loading) return "Loading...";
-      if (error) return `Error! ${error.message}`;
-
-      return (
-        <div>{data.item.message.value}</div>
-      );
-    }}
-    </Query>
-  );
-};
+import '../../assets/chat.css';
 
 class ChatRoom extends React.Component {
 
   constructor(props) {
     super(props);
 
-    this.handleMessageSubmit = this.handleMessageSubmit.bind(this);
-    this.handleMessageChange = this.handleMessageChange.bind(this);
-    this.handleAddMessageCompleted = this.handleAddMessageCompleted.bind(this);
+    this.handleChatMessage = this.handleChatMessage.bind(this);
+    this.handleSetUsername =  this.handleSetUsername.bind(this);
 
     this.state = {
       items: [],
-      message: '',
-      submitDisabled: false
+      username: ''
     }
   }
 
   isValidChatMessage(data) {
-    if (data && !this.state.items.find((item) => item.id === data.itemAdded.id)) {
+    if (data && !this.state.items.find((item) => item.id === data.id)) {
       return true;
     }
 
     return false;
   }
 
-  handleMessageSubmit(e, addMessage) {
-    e.preventDefault();
-
-    if (!this.state.message) {
-      return;
+  handleChatMessage(data) {
+    if (data && this.isValidChatMessage(data)) {
+      this.setState({
+        items: [...this.state.items, data]
+      })
     }
-
-    this.setState({
-      submitDisabled: true
-    });
-
-    var message = this.state.message;
-
-    addMessage({
-      variables: {
-        name: "Message" + new Date().getTime(),
-        parent: this.props.rendering.dataSource,
-        message: message
-      }
-    });
   }
 
-  handleMessageChange(e) {
-    this.setState({ message: e.target.value });
-  }
-
-  handleAddMessageCompleted() {
+  handleSetUsername(username) {
     this.setState({
-      submitDisabled: false,
-      message: ''
+      username: username
     });
+    this.forceUpdate();
   }
 
   render() {
-    return <div>
-      <Subscription
-        subscription={ConnectedDemoQuery}>
-        {({ loading, error, data }) => {
-          if (data && this.isValidChatMessage(data)) {
-            this.setState({
-              items: [...this.state.items, data.itemAdded]
-            })
-          }
-          return null;
-        }}
-      </Subscription>
+    return <div className="chat">
+      {this.state.username &&
+        <React.Fragment>
+          <ChatRoomSubscription onChatMessage={this.handleChatMessage} />
 
-      {this.state.items.map((item, index) => {
-        return <ChatRoomMessage key={index} message={item} />
-      })}
+          <ChatRoomMessages items={this.state.items} username={this.state.username} />
 
-      <Mutation mutation={CreateMessageQuery} ignoreResults={true} onCompleted={this.handleAddMessageCompleted}>
-        {(addMessage, { data }) => (
-          <Form onSubmit={(e) => {
-            this.handleMessageSubmit(e, addMessage);
-          }}>
-            <Form.Group controlId="formBasicEmail">
-              <Form.Label>Message</Form.Label>
-              <Form.Control type="text" placeholder="Enter message"
-                value={this.state.message} onChange={this.handleMessageChange}
-                disabled={this.state.submitDisabled} />
-            </Form.Group>
-            <Button variant="primary" type="submit" disabled={this.state.submitDisabled}>
-              Submit
-        </Button>
-          </Form>
-        )}
-      </Mutation>
+          <ChatRoomForm rendering={this.props.rendering} username={this.state.username} />
+        </React.Fragment>
+      }
+      {!this.state.username && <ChatUsernameForm onSetUsername={this.handleSetUsername} />}
     </div>
   }
 
