@@ -1,11 +1,7 @@
 import React from 'react';
-import { loader as gqlLoader } from 'graphql.macro';
-import { Mutation } from "react-apollo";
 import { Form, Button, InputGroup, FormControl } from 'react-bootstrap';
 
-const CreateMessageQuery = gqlLoader('./createquery.graphql');
-
-class ChatRoomForm extends React.Component {
+class ChatUsernameForm extends React.Component {
 
     constructor(props) {
         super(props);
@@ -50,4 +46,4 @@ class ChatRoomForm extends React.Component {
 
 }
 
-export default ChatRoomForm;
+export default ChatUsernameForm;

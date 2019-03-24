@@ -21,7 +21,8 @@ class ChatRoom extends React.Component {
   }
 
   isValidChatMessage(data) {
-    if (data && !this.state.items.find((item) => item.id === data.id)) {
+    if (data && !this.state.items.find((item) => item.id === data.id) &&
+        data.name.indexOf("Message") === 0) {
       return true;
     }
 

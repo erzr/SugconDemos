@@ -11,7 +11,7 @@ const ChatRoomMessage = ({ message, username }) => {
         if (loading) return <li></li>;
 
         return (
-          <li className={username == data.item.username.value ? "me" : "them"}>{data.item.message.value}</li>
+          <li className={username === data.item.username.value ? "me" : "them"}>{data.item.message.value}</li>
         );
       }}
     </Query>
