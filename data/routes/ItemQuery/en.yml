@@ -1,3 +1,9 @@
 id: item-query
 fields:
   pageTitle: Item Query!
+placeholders:
+  jss-main:
+    - componentName: DemoStructure
+      placeholders:
+        jss-demo-main:
+          - componentName: ItemQuery
