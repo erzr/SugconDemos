@@ -1,0 +1,6 @@
+query Demo($datasource: String!, $contextItem: String!)
+{
+    contextItem: item(path: $contextItem) {
+        id
+    }
+}

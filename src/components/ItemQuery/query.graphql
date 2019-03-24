@@ -1,6 +1,6 @@
 query MessageQuery($path:String!){
   item(path:$path) {
     id
-     
+    name
   }
 }

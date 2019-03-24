@@ -1,0 +1,9 @@
+id: integrated
+fields:
+  pageTitle: Integrated Query
+placeholders:
+  jss-main:
+    - componentName: DemoStructure
+      placeholders:
+        jss-demo-main:
+          - componentName: IntegratedDemo
