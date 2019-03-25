@@ -3,6 +3,7 @@ import { loader as gqlLoader } from 'graphql.macro';
 import { Subscription } from "react-apollo";
 import gql from 'graphql-tag';
 import { Table } from 'react-bootstrap';
+import ActivityLogEntry from './ActivityLogEntry';
 
 const ADDED_QUERY = gql`
   subscription
@@ -59,19 +60,22 @@ class ActivityLog extends React.Component {
 
       if (data.itemAdded) {
         entry = {
-          type: 'Added',
-          item: data.itemAdded
+          isAdd: true,
+          item: data.itemAdded,
+          timestamp: Date.now()
         };
       } else if (data.itemDeleted) {
         entry = {
-          type: 'Deleted',
-          item: data.itemDeleted
+          isDelete: true,
+          item: data.itemDeleted,
+          timestamp: Date.now()
         };
       } else if (data.itemSaved) {
         entry = {
-          type: 'Saved',
+          isSave: true,
           item: data.itemSaved.item,
-          changes: []
+          changes: [],
+          timestamp: Date.now()
         }
 
         if (data.itemSaved.changes && data.itemSaved.changes.fieldChanges) {
@@ -89,7 +93,7 @@ class ActivityLog extends React.Component {
 
       if (entry) {
         this.setState({
-          items: [...this.state.items, entry]
+          items: [entry, ...this.state.items]
         })
       }
     }
@@ -104,6 +108,7 @@ class ActivityLog extends React.Component {
       <Table striped bordered hover>
         <thead>
           <tr>
+            <th>Time</th>
             <th>Type</th>
             <th>Name</th>
             <th>Changes</th>
@@ -111,14 +116,7 @@ class ActivityLog extends React.Component {
         </thead>
         <tbody>
           {this.state.items.map((entry, index) => {
-            return <tr>
-              <td>{entry.type}</td>
-              <td>{entry.item.name}</td>
-              <td>
-                {!entry.changes && <span>n/a</span>}
-                {entry.changes && <span>{entry.changes.join(', ')}</span>}
-              </td>
-            </tr>
+            return <ActivityLogEntry entry={entry} key={index} />
           })}
         </tbody>
       </Table>
