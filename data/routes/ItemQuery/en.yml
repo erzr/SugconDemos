@@ -1,9 +1,23 @@
 id: item-query
 fields:
-  pageTitle: Item Query!
+  pageTitle: Item Query
 placeholders:
   jss-main:
     - componentName: DemoStructure
       placeholders:
+        jss-demo-left:
+          - componentName: TextSection
+            fields:
+              heading: Item Query
+              body: |
+                <p>This is an example of executing a GraphQL and selecting the name field from a Sitecore item.</p>
+                <strong>Item Query</strong>
+                <hr />
+                <pre><code>query MessageQuery($path:String!){
+                  item(path:$path) {
+                    id
+                    name
+                  }
+                }</code></pre>
         jss-demo-main:
           - componentName: ItemQuery

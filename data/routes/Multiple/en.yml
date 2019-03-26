@@ -5,5 +5,33 @@ placeholders:
   jss-main:
     - componentName: DemoStructure
       placeholders:
+        jss-demo-left:
+          - componentName: TextSection
+            fields:
+              heading: Multiple Queries
+              body: |
+                <p>
+                  This is an example of how you can execute multiple queries on a single React component. 
+                  You can use apollo-react compose to execute and apply multiple queries to your React components.
+                </p>
+                <p>
+                  The queries aren't even worth talking about in this example but here is how you'd use compose.
+                </p>
+                <strong>Compose Syntax</strong>
+                <hr />
+                <pre><code>export default compose(
+                  GraphQLData(FIRST_QUERY, { name: "firstQuery" }), 
+                  GraphQLData(SECOND_QUERY, { name: "secondQuery" }))(MultipleQueries);</code></pre>
+                <p>
+                  After you wire up your component and define your queries, they're injected as props on your component.
+                </p>
+                <strong>React Component</strong>
+                <hr />
+                <pre><code>const MultipleQueries = ({firstQuery, secondQuery}) => {
+                  return (
+                      {firstQuery.item && firstQuery.item.name}
+                      {secondQuery.item && secondQuery.item.name}
+                  );
+                }</code></pre>
         jss-demo-main:
           - componentName: MultipleQueries

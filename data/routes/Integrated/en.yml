@@ -5,5 +5,33 @@ placeholders:
   jss-main:
     - componentName: DemoStructure
       placeholders:
+        jss-demo-left:
+          - componentName: TextSection
+            fields:
+              heading: Integrated Query
+              body: |
+                <p>Integrated queries are stored on Sitecore items and can be used to modify the route data for the current item.</p>
+                <strong>Integrated Query Syntax</strong>
+                <hr />
+                <pre><code>query ($datasource: String!, $contextItem: String!)
+                {
+                    datasource(value: $datasource) {
+                        name
+                    }
+                    contextItem: item(path: $contextItem) {
+                        id
+                        name
+                    }
+                }</code></pre>
+                <p>To define an integrated query on your component, your component definition should look like this:</p>
+                <strong>Integrated Query Component</strong>
+                <hr />
+                <pre><code>export default function(manifest) {
+                  manifest.addComponent({
+                    name: 'IntegratedDemo',
+                    icon: SitecoreIcon.DocumentTag,
+                    graphQLQuery: query
+                  });
+                }</code></pre>
         jss-demo-main:
           - componentName: IntegratedDemo

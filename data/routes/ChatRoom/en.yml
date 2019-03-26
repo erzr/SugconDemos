@@ -5,12 +5,55 @@ placeholders:
   jss-main:
     - componentName: DemoStructure
       placeholders:
-        jss-demo-main:
+        jss-demo-left:
           - componentName: TextSection
             fields:
-              heading: Welcome to the SUGCON GraphQL Demos
+              heading: Sitecore Chat (Mutation/Subscription)
               body: |
-                <p>This is a demo of a GraphQL subscription query.</p>
+                <p>This is proof of concept chat powered by GraphQL. It's also a little silly, if I'm being perfectly honest.</p>
+                <p>
+                   This component leverages two operations. The first operation is a Subscription operation, which is being used to receive events on newly added items in Sitecore. 
+                   The second operation is a Mutation, which is used to create items and push our chat messages into Sitecore.
+                </p>
+                <strong>Mutation Operation</strong>
+                <hr />
+                <pre><code>mutation Test($name:String!, $parent:String!, 
+                           $message:String!, $username:String!)
+                {
+                  createItem(
+                    name:$name, 
+                    template:"{D8082DEC-6A5D-53BF-B1B2-0EFA04320641}", 
+                    parent:$parent,
+                    fields:[
+                      {
+                        name:"Message",
+                        value:$message
+                      },
+                      {
+                        name:"Username",
+                        value:$username
+                      }
+                    ]) {
+                    name
+                  }
+                }</code></pre>
+                <strong>Subscription Operation</strong>
+                <hr />
+                <pre><code>query MessageQuery($path:String!){
+                  item(path:$path) {
+                    id
+                    name
+                    ... on ChatMessageTemplate {
+                      message {
+                        value
+                      }
+                      username {
+                        value
+                      }
+                    }
+                  }
+                }</code></pre>
+        jss-demo-main:
           - componentName: ChatRoom
             fields:
               heading: Chatroom Demo

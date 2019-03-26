@@ -10,6 +10,9 @@ export default function(manifest) {
   manifest.addComponent({
     name: 'DemoStructure',
     icon: SitecoreIcon.DocumentTag,
-    placeholders: ['jss-demo-main']
+    fields: [
+      { name: 'singleColumn', type: CommonFieldTypes.Checkbox }
+    ],
+    placeholders: ['jss-demo-main', 'jss-demo-left']
   });
 }

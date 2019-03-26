@@ -5,10 +5,50 @@ placeholders:
   jss-main:
     - componentName: DemoStructure
       placeholders:
-        jss-demo-main:
+        jss-demo-left:
           - componentName: TextSection
             fields:
-              heading: Welcome to the SUGCON GraphQL Demos
+              heading: Activity Log (Subscription)
               body: |
-                <p>This is a demo of a GraphQL subscription query.</p>
+                <p>GraphQL supports the <a href="https://www.apollographql.com/docs/react/advanced/subscriptions.html">subscription</a> operation type.</p>
+                <p>Subscriptions allow the server to push messages to clients that are listening via a websocket.</p>
+                <p>
+                  <a href="https://jss.sitecore.com/">Sitecore JSS</a> disables server side rendering (SSR) on subscription operations since the subscriptions are meant to stay open for as long as the component is active 
+                  which would cause the server side rendering to never complete. This functionality is available client side.
+                </p>
+                <p>
+                  This example uses three subscriptions to listen to different GraphQL endpoint subscription fields. Even though these are separate subscriptions, they all use the same websocket connection.
+                </p>
+                <strong>Item Added Subscription</strong>
+                <hr />
+                <pre><code>subscription
+                {
+                  itemAdded {
+                    name
+                  }
+                }</code></pre>
+                <strong>Item Deleted Subscription</strong>
+                <hr />
+                <pre><code>subscription
+                {
+                  itemDeleted {
+                    name
+                  }
+                }</code></pre>
+                <strong>Item Saved Subscription</strong>
+                <hr />
+                <pre><code>subscription
+                {
+                  itemSaved {
+                    item {
+                      name
+                    }
+                    changes {
+                      fieldChanges {
+                        fieldName
+                      }
+                    }
+                  }
+                }</code></pre>
+        jss-demo-main:
           - componentName: ActivityLog

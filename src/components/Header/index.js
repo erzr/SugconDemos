@@ -4,8 +4,32 @@ import { Container, Navbar, Nav, NavDropdown } from 'react-bootstrap';
 import { SITE_SETTINGS_ID } from '../../constants';
 import GraphQLData from '../../lib/GraphQLData';
 import { withNamespaces } from 'react-i18next';
+import gql from 'graphql-tag';
 
-const ConnectedDemoQuery = gqlLoader('./query.graphql');
+const ConnectedDemoQuery = gql`
+query NavQuery($id:String!) {
+  header: item(path:$id) {
+    name
+    
+    ... on SiteSettingsTemplate {
+      siteTitle {
+        value
+      }
+      demoLinks {
+        targetItems {
+          url
+          ... on AppRoute {
+            pageTitle {
+              value
+            }
+          }
+        }
+      }
+    }
+    
+  }
+}
+`;
 
 let DemoNavDropdown = ({ demoLinks }) => (
     <NavDropdown title="Demos" id="basic-nav-dropdown">
