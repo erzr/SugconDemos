@@ -2,9 +2,19 @@ query Demo($datasource: String!, $contextItem: String!)
 {
     datasource(value: $datasource) {
         name
+        ... on IntegratedDemo {
+            testField {
+                value
+            }
+        }
     }
     contextItem: item(path: $contextItem) {
         id
         name
+        ... on AppRoute {
+            pageTitle {
+                value
+            }
+        }
     }
 }

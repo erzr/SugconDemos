@@ -35,3 +35,8 @@ placeholders:
                 }</code></pre>
         jss-demo-main:
           - componentName: IntegratedDemo
+            fields:
+              testField: Cool integrated demo!
+          - componentName: IntegratedDemoNoQuery
+            fields:
+              testField: Cool integrated demo (no GraphQL)!

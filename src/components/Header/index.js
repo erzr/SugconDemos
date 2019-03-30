@@ -7,8 +7,8 @@ import { withNamespaces } from 'react-i18next';
 import gql from 'graphql-tag';
 
 const ConnectedDemoQuery = gql`
-query NavQuery($id:String!) {
-  header: item(path:$id) {
+query NavBar($id:String) {
+  header:item(path:$id) {
     name
     
     ... on SiteSettingsTemplate {
@@ -16,7 +16,7 @@ query NavQuery($id:String!) {
         value
       }
       demoLinks {
-        targetItems {
+      	targetItems {
           url
           ... on AppRoute {
             pageTitle {
@@ -25,6 +25,7 @@ query NavQuery($id:String!) {
           }
         }
       }
+      
     }
     
   }

@@ -15,4 +15,4 @@ const ItemQuery = ({ itemQuery }) => {
   </div>
 };
 
-export default GraphQLData(ItemFieldQuery, { name: 'itemQuery', options: { variables: { path: "/sitecore/content/Home/aa/Sample Item" } } })(ItemQuery);
+export default GraphQLData(ItemFieldQuery, { name: 'itemQuery', options: { variables: { path: "/sitecore/content/Home" } } })(ItemQuery);
